@@ -1,0 +1,38 @@
+version: '3'
+services:
+    mysqldb:
+        image: mysql:5.7
+        # restart: unless-stopped
+        env_file: .env
+        environment:
+        # - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+        - MYSQL_ROOT_PASSWORD=12345
+        # - MYSQL_DATABASE=$MYSQLDB_DATABASE
+        - MYSQL_DATABASE=database_development
+        ports:
+        # first local port: internal port
+        - 3307:3306
+        # volumes:
+        # - db:/var/lib/mysql
+    app:
+        depends_on:
+            - mysqldb
+        links:
+            - mysqldb
+        env_file: .env
+        build:
+            context: .
+            args:
+                - AZURE_KEY_1=$AZURE_KEY_1
+                - OPEN_AI_KEY=$OPEN_AI_KEY
+                - SERVICE_REGION=$SERVICE_REGION
+                - ENVIRONMENT=$ENVIRONMENT
+        ports:
+            - 3000:3000
+
+        volumes:
+            - .:/src
+            - nodemodules:/src/node_modules
+volumes:
+    nodemodules: {}
+    # db: {}

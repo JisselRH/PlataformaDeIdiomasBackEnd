@@ -1,0 +1,71 @@
+doctype html
+html
+link(rel="shortcut icon", href="#")
+
+body
+   
+    div(class="card card-xl-stretch mb-5 mb-xl-8")
+
+        div(class="card-header border-0 pt-5")
+            h3(class="card-title align-items-start flex-column")
+                span(class="card-label fw-bolder fs-3 mb-1") Resumen de consultas
+        
+            div(class="card-toolbar")
+                span(type="button", class="me-4", data-kt-menu-trigger="click", data-kt-menu-placement="bottom-end")
+                    i(class="bi bi-arrow-down-circle fs-2x text-gray-300") 
+                    
+                div(id="export_menu", class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3")
+            
+                    div(class="menu-item px-3")
+                        div(class="menu-content pb-2 px-3 fs-7 text-uppercase") Exportar como...
+                
+                    div(id="btn_export_csv_contacto", class="menu-item px-3")
+                        span(class="menu-link px-3")
+                            i(class="bi bi-file-earmark-spreadsheet me-2") CSV
+                    
+                    div(class="menu-item px-3")
+                        span(id="btn_export_pdf_contacto", class="menu-link px-3")
+                            i(class="bi bi-file-earmark-pdf me-2") PDF
+                
+                    div(class="menu-item px-3")
+                        span(id="btn_export_excel_contacto", class="menu-link px-3")
+                            i(class="bi bi-file-earmark-excel me-2") Excel
+                    
+                    di(class="menu-item px-3")
+                        span(id="btn_export_print_contacto", class="menu-link px-3")
+                        i(class="bi bi-printer me-2") Imprimir
+           
+
+        div(class="card-body pt-0")
+
+            table(id="myTable", class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bolder")
+                thead 
+                    tr 
+                        th id
+                        th status
+                        th origen 
+
+                tbody
+                    each item in connects
+                        tr 
+                            td=item.iduser
+                            td
+                                if item.status =='200'
+                                    p(class="text-success")= item.status
+                                else 
+                                    p(class="text-danger")= item.status
+                            td=item.origin
+
+
+
+script(src="../scripts/js/jquery-3.7.1.js");
+script(src="../scripts/js/jquery.datatables.min.js");
+script(src="../bootstrap-5.0.2/js/bootstrap.min.js");
+script(src="../scripts/datatables.js");
+
+link(rel="stylesheet", href="../bootstrap-5.0.2/css/bootstrap.min.css");
+link(rel="stylesheet", href="../stylesheets/style-personalized.css");
+link(rel="stylesheet", href="../stylesheets/jquery.datatables.min.css");
+
+//script(src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js");
+//link(rel="stylesheet", href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css");

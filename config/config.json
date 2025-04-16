@@ -1,0 +1,31 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "database_development",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "docker": {
+    "username": "root",
+    "password": "12345",
+    "database": "database_development",
+    "host": "mysqldb",
+    "dialect": "mysql",
+    "port": "3306"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "api_plataforma_idiomas",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
