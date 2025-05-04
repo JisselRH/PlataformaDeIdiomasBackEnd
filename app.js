@@ -10,6 +10,31 @@ const indexRouter = require('./routes/index');
 
 const app = express();
 
+process.on('uncaughtException', (err) => {
+  // Usa console.error o tu librería de logging (ej: Winston, Pino)
+  // Asegúrate de que escriba a stderr
+  console.error('FATAL: Excepción no capturada:', err);
+  // Opcional: Da tiempo para que el log se escriba antes de salir
+  setTimeout(() => {
+    process.exit(1);
+  }, 1000); // Espera 1 segundo antes de salir
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  // Usa console.error o tu librería de logging
+  console.error('FATAL: Promesa rechazada no manejada en:', promise, 'razón:', reason);
+  // Opcional: Da tiempo para que el log se escriba
+  setTimeout(() => {
+  process.exit(1); // Salir si se considera un error crítico
+   }, 1000);
+});
+
+// Otros logs de inicio
+console.log('Aplicación Node.js iniciando...');
+// Loggea después de configurar servidores, conectar DBs, etc.
+console.log('Servidor web configurado.');
+// ...
+
 app.use(cors({
   origin: '*',
 }));
